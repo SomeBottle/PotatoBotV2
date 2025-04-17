@@ -24,6 +24,6 @@ class MCStatusHandler(MessageHandler):
             status = await server.async_status()
             server_version = status.version.name  # 服务器版本
             server_online = status.players.online  # 在线人数
-            return f"\n----- 🍴 🥔 🍴 -----\n\n🛎️ 餐厅版本：{server_version} \n🥂 目前有 {server_online} 人正在用餐~"
+            return f"\n----- 🍴 🥔 🍴 -----\n\n🥂 目前有 {server_online} 人正在用餐~\n🛎️ 餐厅版本：{server_version}\n➤ 餐厅地址：bottlem<dot>top"
         except TimeoutError:
-            return "哦漏！土豆疑似熟了 (+_+)...可以稍后再试试"
+            return "\n哦漏！土豆疑似熟了 (+_+)...\n别慌，是技术性调整，可以稍后再试试"

@@ -3,7 +3,7 @@ from msg_router import MessageRouter
 from configs.secret import BOT_APP_ID, BOT_APP_SECRET
 from bot_client import QQBotClient
 from msg_router import MessageRouter
-from handlers import HelloHandler, MCStatusHandler
+from handlers import HelloHandler, MCStatusHandler, HelpHandler, EmptyHandler
 
 msg_router = MessageRouter()
 
@@ -15,9 +15,21 @@ msg_router.register(
 )
 
 msg_router.register(
-    regex=r"^土豆状态$",
+    regex=r"^/土豆状态$",
     priority=1,
     handler=MCStatusHandler(),
+)
+
+msg_router.register(
+    regex=r"^/土豆帮助$",
+    priority=1,
+    handler=HelpHandler(),
+)
+
+msg_router.register(
+    regex=r"^\s*?$",
+    priority=0,
+    handler=EmptyHandler(),
 )
 
 # --------- 客户端，启动 ---------

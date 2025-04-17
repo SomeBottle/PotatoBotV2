@@ -5,7 +5,6 @@
 import random
 
 from handlers.abc import MessageHandler
-from collections.abc import Awaitable
 
 response_list = [
     "你好呀！(≧▽≦)",

@@ -3,6 +3,7 @@
 """
 
 import botpy
+import asyncio
 
 from msg_router import MessageRouter
 from botpy.message import Message
@@ -14,6 +15,8 @@ _logger = logging.get_logger()
 _bot_intents = botpy.Intents(
     public_messages=True, public_guild_messages=True, direct_message=True
 )
+
+REPLY_MAX_RETRY = 5  # 回复最大重试次数
 
 
 class QQBotClient(botpy.Client):
@@ -31,4 +34,13 @@ class QQBotClient(botpy.Client):
             _logger.info(f'Message "{message.content}" not matched any handler')
             return
         reply_content = await handler.handle(message)
-        await message.reply(content=reply_content)
+        retry_times = 0
+        while retry_times < REPLY_MAX_RETRY:
+            reply_resp = await message.reply(content=reply_content)
+            if reply_resp is not None:
+                break
+            _logger.warning(
+                f"Reply failed, retrying after 3 seconds... (attempt {retry_times + 1}/{REPLY_MAX_RETRY})"
+            )
+            await asyncio.sleep(3)
+            retry_times += 1
