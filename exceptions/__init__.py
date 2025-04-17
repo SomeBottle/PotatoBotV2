@@ -3,6 +3,16 @@
 """
 
 
+class HandlerError(Exception):
+    """
+    自定义异常类，表示消息处理器错误
+    """
+
+    def __init__(self, message="Handler error."):
+        super().__init__(message)
+        self.message = message
+
+
 class LLMAPIError(Exception):
     """
     自定义异常类，表示大模型 API 错误
