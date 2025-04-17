@@ -1,0 +1,21 @@
+version: '3'
+
+# Compose File 文档: https://docs.docker.com/compose/compose-file/
+
+# 桥接网络无法连接 Internet 的问题解决方案: https://github.com/MicrosoftDocs/WSL/issues/422#issuecomment-1054794404  
+
+
+services:
+  potatobot-v2:
+    image: somebottle/potatobot:2.0.0
+    container_name: potatobot-v2
+    restart: unless-stopped
+    env_file: ./conf.env
+    tty: true
+    dns: 8.8.8.8
+    networks:
+      - potatobot-network
+
+networks:
+  potatobot-network: # 桥接网络
+    driver: bridge

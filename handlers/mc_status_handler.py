@@ -4,7 +4,7 @@ Minecraft 服务器状态查询相关处理器
 
 from handlers.abc import MessageHandler
 from mcstatus import JavaServer
-from configs.mc_server import SERVER_ADDR
+from configs.mc_server import MC_SERVER_ADDR
 from asyncio.exceptions import TimeoutError
 from utils import NullLogger
 
@@ -23,7 +23,7 @@ class MCStatusHandler(MessageHandler):
         """
         logger = logger or NullLogger()
         try:
-            server = await JavaServer.async_lookup(SERVER_ADDR, timeout=10)
+            server = await JavaServer.async_lookup(MC_SERVER_ADDR, timeout=10)
             status = await server.async_status()
             server_version = status.version.name  # 服务器版本
             server_online = status.players.online  # 在线人数

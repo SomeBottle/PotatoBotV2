@@ -1,7 +1,7 @@
 import asyncio
 from mcstatus import JavaServer
 from mcstatus.status_response import JavaStatusResponse
-from configs.mc_server import SERVER_ADDR
+from configs.mc_server import MC_SERVER_ADDR
 
 async def get_mc_status() -> JavaStatusResponse:
     """
