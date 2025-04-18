@@ -6,14 +6,14 @@ import random
 
 from handlers.abc import MessageHandler
 from collections import deque
-from llm import LLMApi
+from models import LLMApi
 from exceptions import (
-    LLMAPIEmptyResponseError,
-    LLMAPIRateLimitExceededError,
-    LLMAPIError,
+    ModelAPIEmptyResponseError,
+    ModelAPIRateLimitExceededError,
+    ModelAPIError,
     HandlerError,
 )
-from configs.llm import LLM_TEMPERATURE, LLM_API_BASE_URL, LLM_MODEL
+from configs.models import LLM_TEMPERATURE, LLM_API_BASE_URL, LLM_MODEL
 from configs.secret import LLM_API_KEY
 from utils import NullLogger
 
@@ -68,12 +68,12 @@ class EmptyHandler(MessageHandler):
             # 把返回消息加入缓存
             _response_cache.append(resp_msg)
             return resp_msg
-        except LLMAPIEmptyResponseError as e:
+        except ModelAPIEmptyResponseError as e:
             logger.warning(f"LLM API Empty Response: {e}")
             return self._get_fallback_msg()
-        except LLMAPIRateLimitExceededError as e:
+        except ModelAPIRateLimitExceededError as e:
             logger.warning(f"LLM API Rate Limit Exceeded: {e}")
             return self._get_fallback_msg()
-        except LLMAPIError as e:
+        except ModelAPIError as e:
             logger.warning(f"LLM API Error: {e}")
             return self._get_fallback_msg()

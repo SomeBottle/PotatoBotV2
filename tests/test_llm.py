@@ -7,7 +7,7 @@ base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_dir)
 
 from openai import AsyncOpenAI, RateLimitError
-from configs.llm import LLM_TEMPERATURE, LLM_API_BASE_URL, LLM_MODEL
+from configs.models import LLM_TEMPERATURE, LLM_API_BASE_URL, LLM_MODEL
 from configs.secret import LLM_API_KEY
 
 client = AsyncOpenAI(

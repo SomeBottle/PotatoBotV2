@@ -4,9 +4,9 @@
 
 from openai import AsyncOpenAI, RateLimitError, APIError
 from exceptions import (
-    LLMAPIRateLimitExceededError,
-    LLMAPIEmptyResponseError,
-    LLMAPIError,
+    ModelAPIRateLimitExceededError,
+    ModelAPIEmptyResponseError,
+    ModelAPIError,
 )
 
 TPM_RPM_LIMIT_KEYWORDS = ["TPM", "RPM", "TOKENS PER MINUTE", "REQUESTS PER MINUTE"]
@@ -61,19 +61,19 @@ class LLMApi:
                 resp_json = resp.to_json()
                 for keyword in TPM_RPM_LIMIT_KEYWORDS:
                     if keyword in resp_json:
-                        raise LLMAPIRateLimitExceededError(
+                        raise ModelAPIRateLimitExceededError(
                             f"Rate limit error: {resp_json}"
                         )
                 for keyword in RATE_LIMIT_KEYWORDS:
                     if keyword in resp_json:
-                        raise LLMAPIRateLimitExceededError(
+                        raise ModelAPIRateLimitExceededError(
                             f"Rate limit error: {resp_json}"
                         )
 
-                raise LLMAPIEmptyResponseError(
+                raise ModelAPIEmptyResponseError(
                     f"LLM returned an empty response: {resp_json}"
                 )
         except RateLimitError as e:
-            raise LLMAPIRateLimitExceededError(f"Rate limit error: {e}")
-        except APIError as e:
-            raise LLMAPIError(f"Unexpected LLM API error: {e}")
+            raise ModelAPIRateLimitExceededError(f"Rate limit error: {e}")
+        except ModelAPIError as e:
+            raise ModelAPIError(f"Unexpected LLM API error: {e}")

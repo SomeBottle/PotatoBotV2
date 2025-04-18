@@ -13,9 +13,9 @@ class HandlerError(Exception):
         self.message = message
 
 
-class LLMAPIError(Exception):
+class ModelAPIError(Exception):
     """
-    自定义异常类，表示大模型 API 错误
+    自定义异常类，表示模型 API 错误
     """
 
     def __init__(self, message="LLM API error."):
@@ -23,9 +23,9 @@ class LLMAPIError(Exception):
         self.message = message
 
 
-class LLMAPIRateLimitExceededError(LLMAPIError):
+class ModelAPIRateLimitExceededError(ModelAPIError):
     """
-    自定义异常类，表示超过速率限制
+    自定义异常类，表示模型 API 调用超过速率限制
     """
 
     def __init__(self, message="Rate limit exceeded. Please try again later."):
@@ -33,9 +33,9 @@ class LLMAPIRateLimitExceededError(LLMAPIError):
         self.message = message
 
 
-class LLMAPIEmptyResponseError(LLMAPIError):
+class ModelAPIEmptyResponseError(ModelAPIError):
     """
-    自定义异常类，表示大模型返回空响应
+    自定义异常类，表示模型 API 返回空响应
     """
 
     def __init__(self, message="LLM returned an empty response."):

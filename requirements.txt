@@ -1,3 +1,5 @@
+aiohttp==3.11.16
 mcstatus==11.1.1
+numpy==2.2.4
 openai==1.75.0
 qq_botpy==1.2.1
