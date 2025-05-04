@@ -7,7 +7,7 @@ version: '3'
 
 services:
   potatobot-v2:
-    image: somebottle/potatobot:2.0.0
+    image: somebottle/potatobot:2.0.1
     container_name: potatobot-v2
     restart: unless-stopped
     env_file: ./conf.env

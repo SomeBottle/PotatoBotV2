@@ -33,17 +33,17 @@ msg_router.register(
     handler=MCFAQHandler(),
 )
 
-# msg_router.register(
-#     regex=r"^/土豆状态$",
-#     priority=1,
-#     handler=MCStatusHandler(),
-# )
+msg_router.register(
+    regex=r"^#土豆状态$",
+    priority=1,
+    handler=MCStatusHandler(),
+)
 
-# msg_router.register(
-#     regex=r"^/土豆帮助$",
-#     priority=1,
-#     handler=HelpHandler(),
-# )
+msg_router.register(
+    regex=r"^#土豆帮助$",
+    priority=1,
+    handler=HelpHandler(),
+)
 
 msg_router.register(
     regex=r"^\s*?$",
